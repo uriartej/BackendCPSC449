@@ -1,0 +1,111 @@
+-- classes table
+CREATE TABLE classes (
+    class_id INTEGER PRIMARY KEY,
+    section_number TEXT NOT NULL,
+    instructor_id INTEGER NOT NULL,
+    current_enrollment INTEGER,
+    FOREIGN KEY (section_number) REFERENCES section (section_number),
+    FOREIGN KEY (instructor_id) REFERENCES instructors (instructor_id)
+);
+
+-- insert data into classes table
+INSERT INTO classes (section_number, instructor_id, current_enrollment) VALUES
+    ('01', 1, 25),
+    ('02', 2, 20),
+    ('03', 1, 15),
+    ('04', 3, 30);
+
+
+-- sections table
+CREATE TABLE sections (
+    section_number TEXT PRIMARY KEY,
+    course_code TEXT NOT NULL,
+    instructor_id INTEGER,
+    max_enrollment INTEGER,
+    is_frozen BOOLEAN,
+    FOREIGN KEY (course_code) REFERENCES courses (course_code)
+);
+
+-- insert into sections table
+INSERT INTO sections (section_number, course_code, instructor_id, max_enrollment, is_frozen) VALUES
+    ('01', 'CPSC120', 1, 30, 0),
+    ('02', 'CPSC121', 2, 25, 0),
+    ('03', 'MATH150A', 1, 30, 0),
+    ('04', 'MATH150B', 3, 30, 1);
+ 
+
+-- courses table
+CREATE TABLE courses (
+    course_code TEXT PRIMARY KEY,
+    department TEXT,
+    name TEXT
+);
+
+-- insert data into courses table
+INSERT INTO courses (course_code, department, name) VALUES
+('CPSC120', 'Computer Science', 'Introduction to Programming'),
+('CPSC121', 'Computer Science', 'Object Oriented Programming'),
+('CPSC131', 'Computer Science', 'Data Structure'),
+('MATH150A', 'Mathematics', 'Calculus I'),
+('MATH150B', 'Mathematics', 'Calculus II');
+
+-- students table
+CREATE TABLE students (
+    student_id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+-- insert into students table
+INSERT INTO students (student_id, name) VALUES
+    (100, 'Alice Parker'),
+    (101, 'Jill Doe'),
+    (102, 'Clara Star'),
+    (103, 'Bob Burger'),
+    (104, 'Sarah Lu');
+    
+-- insert into instructors table
+CREATE TABLE instructors (
+    instructor_id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+-- insert into instructors table
+INSERT INTO instructors (instructor_id, name) VALUES
+    (1, 'John Doe'),
+    (2, 'Will Smith'),
+    (3, 'Jane Noe');
+
+-- registrations table
+CREATE TABLE registrations (
+    registration_id INTEGER PRIMARY KEY,
+    class_id INTEGER NOT NULL,
+    student_id INTEGER NOT NULL,
+    status TEXT,
+    FOREIGN KEY (class_id) REFERENCES classes (class_id),
+    FOREIGN KEY (student_id) REFERENCES students (student_id)
+);
+
+-- insert into registrations table
+INSERT INTO registrations (class_id, student_id, status) VALUES
+    (4, 100, 'not enrolled'),
+    (1, 101, 'enrolled'),
+    (1, 102, 'enrolled'),
+    (2, 103, 'enrolled'),
+    (3, 102, 'enrolled');
+
+-- waiting lists table
+CREATE TABLE waiting_lists (
+    waiting_list_id INTEGER PRIMARY KEY,
+    section_number TEXT NOT NULL,
+    student_id INTEGER NOT NULL,
+    position INTEGER,
+    date_added DATETIME,
+    FOREIGN KEY (section_number) REFERENCES sections (section_number),
+    FOREIGN KEY (student_id) REFERENCES students (student_id)
+);
+
+-- insert into waiting lists table
+INSERT INTO waiting_lists (section_number, student_id, position, date_added) VALUES
+    ('01', 103, 1, '2023-09-25 10:00:00'),
+    ('01', 102, 2, '2023-09-23 10:05:00'),
+    ('02', 101, 3, '2023-09-20 09:10:00');
