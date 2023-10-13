@@ -1,0 +1,53 @@
+{
+    "version": 3,
+    "endpoints": [
+        {
+            "endpoint": "/api/books/",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/books/",
+                    "host": [
+                        "http://localhost:5000"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/books/",
+            "method": "POST",
+            "backend": [
+                {
+                    "url_pattern": "/books/",
+                    "host": [
+                        "http://localhost:5000"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/books/{id}",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/books/{id}",
+                    "host": [
+                        "http://localhost:5000"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/search",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/search",
+                    "host": [
+                        "http://localhost:5000"
+                    ]
+                }
+            ]
+        }
+    ]
+}
