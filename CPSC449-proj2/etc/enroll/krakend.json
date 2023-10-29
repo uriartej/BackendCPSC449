@@ -1,0 +1,424 @@
+{
+    "version": 3,
+    "middleware": {
+        "auth/jwt": {
+            "alg": "RS256",
+            "jwk_local_path": "./app/jwk.json",
+            "cache": true,
+            "required_roles": {
+                "/enroll_api/courses": {
+                    "GET": [
+                        "Student"
+                    ],
+                    "POST": [
+                        "Registrar"
+                    ]
+                },
+                "/enroll_api/courses/{course_id}": [
+                    "Student"
+                ],
+                "/enroll_api/courses/{course_id}/waitlist": [
+                    "Instructor"
+                ],
+                "/enroll_api/sections": {
+                    "GET": [
+                        "Student"
+                    ],
+                    "POST": [
+                        "Registrar"
+                    ]
+                },
+                "/enroll_api/sections/{section_id}": {
+                    "GET": [
+                        "Instructor"
+                    ],
+                    "PATCH": [
+                        "Registrar"
+                    ],
+                    "DELETE": [
+                        "Registrar"
+                    ]
+                },
+                "/enroll_api/sections/{section_id}/enrollments": [
+                    "Instructor",
+                    "Registrar"
+                ],
+                "/enroll_api/sections/{section_id}/waitlist": [
+                    "Instructor",
+                    "Registrar"
+                ],
+                "/enroll_api/users": [
+                    "Registrar"
+                ],
+                "/enroll_api/users/{user_id}": [
+                    "Registrar"
+                ],
+                "/enroll_api/users/{user_id}/enrollments": {
+                    "GET": [
+                        "Instructor"
+                    ],
+                    "POST": [
+                        "Student"
+                    ]
+                },
+                "/enroll_api/users/{user_id}/sections": [
+                    "Instructor"
+                ],
+                "/enroll_api/users/{user_id}/waitlist": [
+                    "Student"
+                ],
+                "/enroll_api/users/{user_id}/enrollments/{section_id}": [
+                    "Student"
+                ],
+                "/enroll_api/sections/{section_id}/enrollments/{user_id}": [
+                    "Instructor",
+                    "Registrar"
+                ]
+            }
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/enoll_api/courses/",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/course/",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enoll_api/courses/",
+            "method": "POST",
+            "backend": [
+                {
+                    "url_pattern": "/course/",
+                    "method": "POST",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/courses/{course_id}/",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/coures/{course_id}/",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/courses/{course_id}/waitlist",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/courses/{course_id}/waitlist",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/sections",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections",
+            "method": "POST",
+            "backend": [
+                {
+                    "url_pattern": "/sections",
+                    "method": "POST",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections/{section_id}",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections/{section_id}",
+            "method": "PATCH",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}",
+                    "method": "PATCH",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections/{section_id}",
+            "method": "DELETE",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}",
+                    "method": "DELETE",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections/{section_id}/enrollments",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}/enrollments",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/sections/{section_id}/waitlist",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}/waitlist",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/users/",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users/{user_id}",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users/{user_id}/enrollments",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}/enrollments",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users/{user_id}/enrollments",
+            "method": "POST",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}/enrollments",
+                    "method": "POST",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users/{user_id}/sections",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}/sections",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/enroll_api/users/{user_id}/waitlist",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}/waitlist",
+                    "method": "GET",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/users/{user_id}/enrollments/{section_id}",
+            "method": "DELETE",
+            "backend": [
+                {
+                    "url_pattern": "/users/{user_id}/enrollments/{section_id}",
+                    "method": "DELETE",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "/sections/{section_id}/enrollments/{user_id}",
+            "method": "DELETE",
+            "backend": [
+                {
+                    "url_pattern": "/sections/{section_id}/enrollments/{user_id}",
+                    "method": "DELETE",
+                    "host": [
+                        "http://localhost:5000",
+                        "http://localhost:5001",
+                        "http://localhost:5002"
+                    ],
+                    "middleware": [
+                        "auth/validator"
+                    ]
+                }
+            ]
+        }
+    ]
+}

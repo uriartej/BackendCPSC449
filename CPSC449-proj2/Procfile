@@ -1,0 +1,7 @@
+enrollment: uvicorn --port $PORT app.enroll_api:app --reload
+auth: uvicorn --port $PORT app.auth_api:app --reload
+#user_primary: ./bin/litefs mount -config ./etc/user/primary.yml
+#user_secondary-1: ./bin/litefs mount -config ./etc/user/secondary-1.yml
+#user_secondary-2: ./bin/litefs mount -config ./etc/user/secondary-2.yml
+user_krakend: echo ./etc/user/krakend.json | entr -nrz krakend run -c ./etc/user/krakend.json -p $PORT
+enroll_krakend: echo ./etc/enroll/krakend.json | entr -nrz krakend run -c ./etc/enroll/krakend.json -p $PORT
